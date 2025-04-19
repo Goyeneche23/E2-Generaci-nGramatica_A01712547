@@ -1,7 +1,7 @@
 # E2-Generaci-nGramatica_A01712547
 ### By Juan José Goyeneche Sánchez
 ---------------------------------------------
-###Descripción
+### Descripción
 --------------------------
 La gramatica en la implementación de lenguajes en metodos computacionales, esta delimita las reglas y estructura de estos lenguajes, creando una syntaxis que debera seguirse. Esta gramatica funciona a traves de estados los cuales terminan llegando a un punto terminal, estos estados sirven para delimitarlas estructuras que pueden llegar a formar los lenguajes con los puntos terminales. Para este proyecto tendremos que hacer uso de esto para crear la gramatica o almenos una parte del idioma Aleman.
 
