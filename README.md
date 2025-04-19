@@ -9,9 +9,9 @@ Un Ejemplo simple:
 ```
 S -> Sujeto
 Sujeto -> Nombre | Pronombre N
-N -> carro | casa | hombre
+N -> carro | casa | hombre | ε
 Nombre -> paul
-Pronombre -> El | La | ε
+Pronombre -> El | La 
 ```
 Este ejemplo nos muestra como a traves de los estados se establezcan reglas.  En este caso lo aceptado seria: 
   * La Casa
