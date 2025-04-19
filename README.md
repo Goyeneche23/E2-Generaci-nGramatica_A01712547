@@ -1,4 +1,4 @@
-# E2-Generaci-nGramatica_A01712547
+# E2-GeneraciónGramatica_A01712547
 ### By Juan José Goyeneche Sánchez
 ---------------------------------------------
 ### Descripción
@@ -42,7 +42,7 @@ En este ejemplo hay diferentes maneras de llegar a la cadena "hola mundo", esto 
 La recursión izquierda ocurre en una gramática cuando una regla de producción tiene una llamada recursiva a sí misma como primer elemento del lado derecho.
 Ejemplo: 
 ```
-A → Aα | ε
+A → A c | ε
 ```
 Esta recursion provoca que el parser empiece nuevamente A sin terminar la tarea de a, por lo cual entrara en un bucle, lo que se busca evitar.
 
