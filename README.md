@@ -3,8 +3,24 @@
 ---------------------------------------------
 ##Descripción
 --------------------------
-La gramatica 
+La gramatica en la implementación de lenguajes en metodos computacionales, esta delimita las reglas y estructura de estos lenguajes, creando una syntaxis que debera seguirse. Esta gramatica funciona a traves de estados los cuales terminan llegando a un punto terminal, estos estados sirven para delimitarlas estructuras que pueden llegar a formar los lenguajes con los puntos terminales. Para este proyecto tendremos que hacer uso de esto para crear la gramatica o almenos una parte del idioma Aleman.
 
+Un Ejemplo simple:
+```
+S -> Sujeto
+Sujeto -> Nombre | Pronombre N
+N -> carro | casa | hombre
+Nombre -> paul
+Pronombre -> El | La | ε
+```
+Este ejemplo nos muestra como a traves de los estados se establezcan reglas.  En este caso lo aceptado seria: 
+  * La Casa
+  * El Carro
+  * El
+  * Paul
+Pero no se reconoceran los siguientes como sujeto por su error gramatical:
+  * El Paul
+  * Carro 
 
 Primero veamos el punto de inflección de cuando se termino la gramatica y justo antes de que se empezara a modificar para evitar ambiguedad y una recursion Izquierda. Mientras estuve realizando esto tambien fui pensando en evitar la ambiguedad, esto facilita el siguiente paso de modificar para evitar ambiguedad y recursion izquierda, porque como se vera son pocas las cosas a cambiar, pero de igual manera limita la creación de la gramatica. Hubieron muchas decisiones que se tomaron pensando en esto, que limitaron el lenguaje, como al final quitar la separacion de articulos dependiendo el caso o genero, O el delimitar verbos en base a su conjugación temporal. Esto hubiera generado de manera potencial ambiguedad en la gramatica, y aunque podria llegar a hacerse, siendo especialmente el Aleman un idioma tan rico y donde la estructura de la oracion cambia mucho dependiendo de las conjugaciones, nos hubiera quedado una gramatica MUCHISIMO mas grande. a continuacion unos ejemplos de donde hubiera existido un problema con la ambiguedad, y como se podria haber encontrado una solucion:
 
