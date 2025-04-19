@@ -18,6 +18,7 @@ Este ejemplo nos muestra como a traves de los estados se establezcan reglas.  En
   * El Carro
   * El
   * Paul
+    
 Pero no se reconoceran los siguientes como sujeto por su error gramatical:
   * El Paul
   * Carro 
