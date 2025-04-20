@@ -1,5 +1,5 @@
 # E2-GeneraciónGramatica_A01712547
-### By Juan José Goyeneche Sánchez
+### By Juan José Goyeneche Sánchez | A01712547
 ---------------------------------------------
 ### Descripción
 --------------------------
@@ -124,3 +124,18 @@ Como funciona esto es que el parser hara uso de las tablas generadas para buscar
 ![image](https://github.com/user-attachments/assets/a1ce8dba-a48e-4db5-8018-7dbf1398abf6)
 
 Esta es la complejidad de nuestro parser LL(1), donde n dependera de la cadena que mandemos a analizar. De igual manera el peor caso y el mejor caso posible seran O(n), el mejor caso sera O(1).
+
+#### Referencias
+GeeksforGeeks (06 Feb 2025). Construction of LL(1) Parsing Table. https://www.geeksforgeeks.org/construction-of-ll1-parsing-table/
+
+
+Kumari, S. (17 Mar 2025). Chomsky Hierarchy. Naukri Code 360. https://www.naukri.com/code360/library/chomsky-hierarchy
+
+
+Moreno, M. (December 2, 2004) Elimination of left recursion https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node8.html
+
+
+Straub, J. (7 Oct 2024). How to form basic German sentences. Lingoda. https://www.lingoda.com/blog/en/how-to-form-basic-german-sentences/
+
+
+Princeton (n.d.). LL(1) Parser Visualization. https://www.cs.princeton.edu/courses/archive/spring20/cos320/LL1/
