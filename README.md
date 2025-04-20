@@ -106,7 +106,13 @@ Adv -> 'immer' | 'sehr' | 'nie' | 'oft' | 'hier' | 'dort' | 'heute' | ε
 Adj -> 'schön' | 'laut'  | 'klein' | 'intelligent' | 'dumm' | 'freundlich' | 'traurig'
 Neg -> 'nicht' | ε
  ```
+-----------------------------------
+#### Tipo de Gramatica
+Basandonos en 'The Extended Chomsky Hierarchy´ encontramos que esta gramatica basada en el idioma aleman que hicimos, es una gramatica libre de contexto. Esto pasa porque no existe dependencia, osease no existe contexto.  Esto se debe a que en todas las reglas, el lado izquierdo contiene únicamente variables y no terminales, lo que impide que se clasifique como una gramática que dependa de un contexto. Por esto que de igual manera esta relacionado a lo que se comento arriba sobre la ambiguedad, es que esta gramatica pertenece a un lenguaje de tipo dos.
 
+![image](https://github.com/user-attachments/assets/84603bf9-4776-4837-a3ce-d35d35d116be)
+
+--------------------------------------
 #### Complejidad
 La complejidad de una gramatica como esta no depende realmente de la gramatica en si, si no del parser que se usara para analizar esta. En este caso usaremos un parser LL(1), la gramatica aqui el rol que juega es que en caso de tener recursividad izquierda o ambiguedad, necesitariamos usar otro parser que tendria una complejidad diferente, aunque probablemente sea mas "potente". El Parser LL(1) tiene muchos aspectos que vuelven la complejidad muy simple en comparación a otros parsers.
  * Busqueda Decendente de izquierda a derecha.
@@ -115,5 +121,6 @@ La complejidad de una gramatica como esta no depende realmente de la gramatica e
    
 Como funciona esto es que el parser hara uso de las tablas generadas para buscar la ruta al destino deseado basandose en el tocken del stack en el que se encuentre, pero hay que tomar en cuenta que va de uno en uno. Esto lo vuelve menos practico o potente lo cual exige mas dificultad al crear gramaticas, pero lo volvera menos complejo. 
 * O(n)
+![image](https://github.com/user-attachments/assets/a1ce8dba-a48e-4db5-8018-7dbf1398abf6)
 
 Esta es la complejidad de nuestro parser LL(1), donde n dependera de la cadena que mandemos a analizar. De igual manera el peor caso y el mejor caso posible seran O(n), el mejor caso sera O(1).
