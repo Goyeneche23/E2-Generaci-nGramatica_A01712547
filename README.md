@@ -79,8 +79,7 @@ SubClause -> ConjSub SubSentAux
 ConjSub -> 'dass' | 'weil' | 'wenn' | 'obwohl'
 
 ! -------------------Sujeto------------------------------
-S -> N S'  
-S'-> Conj S | ε
+S -> S Conj N
 A -> 'der' | 'die' | 'das' | 'dem' | 'den' | 'des'
 Aind -> 'ein' | 'eine' | 'keine' | 'kein' | 'einem' | 'keinem' | 'keiner' | 'einen' | 
 N -> A Noun | Name | Pron
@@ -107,6 +106,21 @@ Adj -> 'schön' | 'laut'  | 'klein' | 'intelligent' | 'dumm' | 'freundlich' | 't
 Neg -> 'nicht' | ε
  ```
 -----------------------------------
+###### Problema Recursividad Izq
+Encontramos un problema de recursividad izquierda en el avance anterior, esto se debe a que se tiene una llamada recursiva a sí misma como primer elemento del lado derecho.
+ ```
+S -> S Conj N
+ ```
+En este caso cuando se llega a S se buscara alcanzar a escribir un n (noun), el problema aqui es que S se llamara a si misma sin saber si se llego a N o no. 
+![image](https://github.com/user-attachments/assets/ccf08d43-4f28-4ba6-b10c-f5b9d4243dd2)
+
+Para arreglar esto debemos de pasar S hasta despues de cualquier tarea, osea a la derecha del todo, pero claro, tambien tenemos el tema de agregar un 'Conj' entre N y N, lo mejor en este caso es crear un estado auxiliar al cual llamar, si se quiere regresar a S.
+```
+S -> N S'
+S' -> Conj S | ε
+```
+Aca la diferencia es que se vuelve a llamar a S, pero esto cuando ya se haya se encuentre N en el stack y el remaining input sea otro, en caso de ser otro N, la funcion auxiliar realizara 'Conj' y tras eso regresara a S, ya sin ninguna tarea pendiente. En caso de querer terminar, en el auxiliar se tomara epsilon y se ira a la siguiente tarea.
+
 #### Tipo de Gramatica
 Basandonos en 'The Extended Chomsky Hierarchy´ encontramos que esta gramatica basada en el idioma aleman que hicimos, es una gramatica libre de contexto. Esto pasa porque no existe dependencia, osease no existe contexto.  Esto se debe a que en todas las reglas, el lado izquierdo contiene únicamente variables y no terminales, lo que impide que se clasifique como una gramática que dependa de un contexto. Por esto que de igual manera esta relacionado a lo que se comento arriba sobre la ambiguedad, es que esta gramatica pertenece a un lenguaje de tipo dos.
 
