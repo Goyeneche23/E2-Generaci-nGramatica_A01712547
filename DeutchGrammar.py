@@ -1,0 +1,231 @@
+import nltk
+from nltk import CFG
+nltk.download('punkt')
+
+# Define a context-free grammar
+grammar = CFG.fromstring("""
+    Inicio -> Sent Inicio1
+    Inicio1 -> Sent Inicio1
+    Inicio1 -> 
+    Sent -> StandSent
+    Sent -> QuestSent
+    StandSent -> StandSentAux FinS
+    StandSentAux -> Suj StSaux
+    StSaux -> P
+    StSaux -> 
+    QuestSent -> QuestSaux FinInt
+    QuestSaux -> QsiNo
+    QuestSaux -> QAbi
+    QsiNo -> V Suj Obj Rest
+    QAbi -> QResPre V Suj Obj Rest
+    QResPre -> ProInt
+    QResPre -> PrepInt
+    Conj -> 'und'
+    Conj -> 'oder'
+    Conj -> 'aber'
+    FinS -> '.'
+    FinInt -> '?'
+    PrepInt -> 'mit wem'
+    PrepInt -> 'an wen'
+    PrepInt -> 'worüber'
+    PrepInt -> 'auf wen'
+    ProInt -> 'wer'
+    ProInt -> 'was'
+    ProInt -> 'wann'
+    ProInt -> 'wo'
+    ProInt -> 'warum'
+    ProInt -> 'wie'
+    ProInt -> 'wohin'
+    ProInt -> 'woher'
+    SubSent -> StandSentAux ',' SubClause FinS
+    SubSentAux -> Suj Obj Rest V
+    SubClause -> ConjSub SubSentAux
+    ConjSub -> 'dass'
+    ConjSub -> 'weil'
+    ConjSub -> 'wenn'
+    ConjSub -> 'obwohl'
+    Suj -> N SujAux
+    SujAux -> Conj N SujAux
+    SujAux -> 
+    A -> 'der'
+    A -> 'die'
+    A -> 'das'
+    A -> 'dem'
+    A -> 'den'
+    A -> 'des'
+    Aind -> 'ein'
+    Aind -> 'eine'
+    Aind -> 'keine'
+    Aind -> 'kein'
+    Aind -> 'einem'
+    Aind -> 'keinem'
+    Aind -> 'meine'
+    Aind -> 'mein'
+    Aind -> 'keiner'
+    Aind -> 'einen'
+    N -> A Noun
+    N -> Name
+    N -> Pron
+    Name -> Nom
+    Name -> Title Nom
+    Noun -> 'Katze'
+    Noun -> 'Hund'
+    Noun -> 'Team'
+    Noun -> 'Mann'
+    Noun -> 'Schwester'
+    Noun -> 'Elephant'
+    Noun -> 'Fußball'
+    Noun -> 'Film'
+    Noun -> 'Freizeit'
+    Noun -> 'Haus'
+    Noun -> 'Auto'
+    Noun -> 'Buch'
+    Noun -> 'Stadt'
+    Noun -> 'Schule'
+    Noun -> 'Liebe'
+    Noun -> 'Zeit'
+    Noun -> 'Problem'
+    Noun -> 'Park'
+    Noun -> 'Wasser'
+    Noun -> 'Brot'
+    Noun -> 'Kaffee'
+    Noun -> 'Essen'
+    Nom -> 'Mark'
+    Nom -> 'Clinton'
+    Nom -> 'Juan'
+    Nom -> 'Jose'
+    Nom -> 'Carla'
+    Nom -> 'Carlos'
+    Nom -> 'Sofia'
+    Nom -> 'Paul'
+    Title -> 'Herr'
+    Title -> 'Fräulein'
+    Title -> 'Frau'
+    Pron -> 'ich'
+    Pron -> 'du'
+    Pron -> 'er'
+    Pron -> 'sie'
+    Pron -> 'es'
+    Pron -> 'wir'
+    Pron -> 'ihr'
+    Pron -> 'Sie'
+    P -> V Obj Rest
+    V -> 'spielt'
+    V -> 'schwimmt'
+    V -> 'ist'
+    V -> 'sieht'
+    V -> 'hat'
+    V -> 'weiß'
+    V -> 'denkt'
+    V -> 'hört'
+    V -> 'liest'
+    V -> 'schreibt'
+    V -> 'geht'
+    V -> 'kommt'
+    V -> 'läuft'
+    V -> 'isst'
+    V -> 'trinkt'
+    V -> 'schläft'
+    V -> 'singt'
+    V -> 'tanzt'
+    V -> 'arbeitet'
+    V -> 'lernt'
+    V -> 'versteht'
+    V -> 'vergisst'
+    V -> 'gewinnt'
+    V -> 'verliert'
+    V -> 'kauft'
+    V -> 'verkauft'
+    V -> 'öffnet'
+    V -> 'schließt'
+    V -> 'findet'
+    V -> 'sucht'
+    V -> 'hilft'
+    V -> 'bricht'
+    V -> 'fällt'
+    V -> 'steigt'
+    V -> 'bleibt'
+    V -> 'beginnt'
+    V -> 'sehen'
+    Obj -> Oaux Obj1
+    Obj -> 
+    Obj1 -> Conj Obj
+    Obj1 -> 
+    Oaux -> JustObj
+    Oaux -> PrepObj
+    JustObj -> A Noun
+    JustObj -> Aind Noun
+    JustObj -> Noun
+    PrepObj -> Prep N
+    Prep -> 'mit'
+    Prep -> 'ohne'
+    Prep -> 'auf'
+    Prep -> 'an'
+    Prep -> 'in'
+    Prep -> 'für'
+    Prep -> 'über'
+    Prep -> 'unter'
+    Rest -> RestAux Rest1
+    Rest -> 
+    Rest1 -> Conj RestAux
+    Rest1 -> 
+    RestAux -> Neg Adj
+    RestAux -> Adv Adj
+    Neg -> 
+    Neg -> 'nicht'
+    Adv -> 'sehr'
+    Adv -> 'nie'
+    Adv -> 'oft'
+    Adv -> 'hier'
+    Adv -> 'dort'
+    Adv -> 'heute'
+    Adv -> 'langsam'
+    Adv -> 'gestern'
+    Adv -> 'morgen'
+    Adv -> 'immer'
+    Adv -> 'manchmal'
+    Adv -> 'vielleicht'
+    Adv -> 'wirklich'
+    Adv -> 'fast'
+    Adv -> 'besonders'
+    Adv -> 'oben'
+    Adv -> 'unten'
+    Adv -> 'leider'
+    Adv -> 'bald'
+    Adv -> 'genug'
+    Adj -> 'schön'
+    Adj -> 'laut'
+    Adj -> 'klein'
+    Adj -> 'intelligent'
+    Adj -> 'dumm'
+    Adj -> 'freundlich'
+    Adj -> 'traurig'
+    Adj -> 'gut'
+    Adj -> 'groß'
+    Adj -> 'alt'
+    Adj -> 'jung'
+    Adj -> 'schnell'
+    Adj -> 'stark'
+    Adj -> 'schwach'
+    Adj -> 'klug'
+    Adj -> 'faul'
+    Adj -> 'fleißig'
+    Adj -> 'glücklich'
+    Adj -> 'böse'
+    Adj -> 'ruhig'
+    Adj -> 'wild'
+    Adj -> 'gesund'
+""")
+
+# Create a parser with the defined grammar
+parser = nltk.ChartParser(grammar)
+
+# Input sentence to be parsed
+sentence = "die Hund und Mark spielt Fußball sehr gut . ich spielt nicht gut . "
+
+# Tokenize the sentence
+tokens = nltk.word_tokenize(sentence)
+
+# Parse the sentence
+for tree in parser.parse(tokens):
+    tree.pretty_print()
