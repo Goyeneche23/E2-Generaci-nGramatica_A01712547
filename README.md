@@ -48,9 +48,9 @@ A → A c | ε
 Esta recursion provoca que el parser empiece nuevamente A sin terminar la tarea de a, por lo cual entrara en un bucle, lo que se busca evitar.
 
 ------------------------------
-Primero veamos el punto de inflección de cuando se termino la gramatica y justo antes de que se empezara a modificar para evitar ambiguedad y una recursion Izquierda. Mientras estuve realizando esto tambien fui pensando en evitar la ambiguedad, esto facilita el siguiente paso de modificar para evitar ambiguedad y recursion izquierda, porque como se vera son pocas las cosas a cambiar, pero de igual manera limita la creación de la gramatica. Hubieron muchas decisiones que se tomaron pensando en esto, que limitaron el lenguaje, como al final quitar la separacion de articulos dependiendo el caso o genero, O el delimitar verbos en base a su conjugación temporal. Esto hubiera generado de manera potencial ambiguedad en la gramatica, y aunque podria llegar a hacerse, siendo especialmente el Aleman un idioma tan rico y donde la estructura de la oracion cambia mucho dependiendo de las conjugaciones, nos hubiera quedado una gramatica MUCHISIMO mas grande. a continuacion unos ejemplos de donde hubiera existido un problema con la ambiguedad, y como se podria haber encontrado una solucion:
+#### Problema Ambiguedad: 
 
-Problema Ambiguedad: 
+Primero veamos el punto de inflección de cuando se termino la gramatica y justo antes de que se empezara a modificar para evitar ambiguedad y una recursion Izquierda. Mientras estuve realizando esto tambien fui pensando en evitar la ambiguedad, esto facilita el siguiente paso de modificar para evitar ambiguedad y recursion izquierda, porque como se vera son pocas las cosas a cambiar, pero de igual manera limita la creación de la gramatica. Hubieron muchas decisiones que se tomaron pensando en esto, que limitaron el lenguaje, como al final quitar la separacion de articulos dependiendo el caso o genero, O el delimitar verbos en base a su conjugación temporal. Esto hubiera generado de manera potencial ambiguedad en la gramatica, y aunque podria llegar a hacerse, siendo especialmente el Aleman un idioma tan rico y donde la estructura de la oracion cambia mucho dependiendo de las conjugaciones, nos hubiera quedado una gramatica MUCHISIMO mas grande. a continuacion unos ejemplos de donde hubiera existido un problema con la ambiguedad, y como se podria haber encontrado una solucion:
 
  ```
  !-----------Lenguaje Aleman--------------------
@@ -157,6 +157,9 @@ Neg ::= nicht
 Basandonos en 'The Extended Chomsky Hierarchy´ encontramos que esta gramatica basada en el idioma aleman que hicimos, es una gramatica libre de contexto. Esto pasa porque no existe dependencia, osease no existe contexto.  Esto se debe a que en todas las reglas, el lado izquierdo contiene únicamente variables y no terminales, lo que impide que se clasifique como una gramática que dependa de un contexto. Por esto que de igual manera esta relacionado a lo que se comento arriba sobre la ambiguedad, es que esta gramatica pertenece a un lenguaje de tipo dos.
 
 ![image](https://github.com/user-attachments/assets/84603bf9-4776-4837-a3ce-d35d35d116be)
+
+#### Tipo de Gramatica: Antes de pasar a parser LL(1).
+A causa de la recursividad izquierda nuestra gramatica podria ser mas dificil de procesar para un analizador, la cual podria no acabar nunca, y para poder completarse o encontrar los caminos adecuados, se ocuparia de contexto, por lo cual podria ser Context Sensitive.
 
 --------------------------------------
 #### Complejidad
