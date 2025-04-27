@@ -140,7 +140,17 @@ Ahora veamos el error de ambiguedad, esta existe porque podemos crear de muchas 
 - Opcion 1: RestAux -> Adj -> 'schön'
 - Opcion 2: RestAux-> Adv Adj -> Adv -> ε -> Adj -> 'schön'
 - Opcion 3: RestAux-> Neg Adv Adj -> Neg -> ε -> Adv -> ε -> Adj -> 'schön'
-Asi como usamos este ejemplo realemente encontramos mucha ambiguedad con otras terminaciones en esta parte de la gramatica, para cambiarlo hay muchas maneras en realidad.
+Asi como usamos este ejemplo realemente encontramos mucha ambiguedad con otras terminaciones en esta parte de la gramatica, para cambiarlo hay muchas maneras en realidad. La que se usa aqui no es la manera mas elegante, pero al identificar que la mayoria de problemas venian desde los epsilon en las terminales, se decidio quitar esos epsilon. Dar a RestAux unas opciones que no puedan coencidir entre ellas mismas, y que el epsilon se encuentre antes de llamar a RestAux.
+```
+Rest ::= RestAux Rest1
+Rest ::= ''
+Rest1 ::= Conj RestAux 
+Rest1 ::= ''
+RestAux ::= Neg Adj
+RestAux ::= Adv Adj
+Neg ::= ''
+Neg ::= nicht
+```
 
 
 #### Tipo de Gramatica
