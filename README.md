@@ -100,7 +100,7 @@ JustObj -> A Noun | Aind Noun | Noun
 PrepObj -> Prep N
 Prep -> 'mit' | 'ohne' | 'auf' | 'an' | 'in' | 'für' | 'über' | 'unter'
 Rest ->  RestAux | RestAux Conj Rest
-RestAux -> Neg Adv Adj | ε
+RestAux -> Neg Adv Adj | Adj | Adv Adj | Neg | ε
 Adv -> 'immer' | 'sehr' | 'nie' | 'oft' | 'hier' | 'dort' | 'heute' | ε
 Adj -> 'schön' | 'laut'  | 'klein' | 'intelligent' | 'dumm' | 'freundlich' | 'traurig'
 Neg -> 'nicht' | ε
@@ -112,6 +112,7 @@ Encontramos un problema de recursividad izquierda en el avance anterior, esto se
 S -> S Conj N
  ```
 En este caso cuando se llega a S se buscara alcanzar a escribir un n (noun), el problema aqui es que S se llamara a si misma sin saber si se llego a N o no. 
+
 ![image](https://github.com/user-attachments/assets/ccf08d43-4f28-4ba6-b10c-f5b9d4243dd2)
 
 Para arreglar esto debemos de pasar S hasta despues de cualquier tarea, osea a la derecha del todo, pero claro, tambien tenemos el tema de agregar un 'Conj' entre N y N, lo mejor en este caso es crear un estado auxiliar al cual llamar, si se quiere regresar a S.
@@ -120,6 +121,27 @@ S -> N S'
 S' -> Conj S | ε
 ```
 Aca la diferencia es que se vuelve a llamar a S, pero esto cuando ya se haya se encuentre N en el stack y el remaining input sea otro, en caso de ser otro N, la funcion auxiliar realizara 'Conj' y tras eso regresara a S, ya sin ninguna tarea pendiente. En caso de querer terminar, en el auxiliar se tomara epsilon y se ira a la siguiente tarea.
+
+###### Problema Ambiguedad
+El siguiente problema de ambiguedad mas estados, en la gramatica del mostrada anteriormente, ocurre en varias situaciones, especialmente entre distintos tipos de oraciones. Incluso la principal razón para no separar verbos, pronombres, etc entre conjugaciones, tiempo y generos y  ponerlos todos en un mismo estado fue que esto generaria casos donde se compartan terminales entre estados y la vuelvan ambigua. El siguiente ejemplo es un poco mas claro pero aun complejo y la respuesta no es tan facil como agregar algo que diferencia las terminales.
+```
+RestAux -> Neg Adv Adj | Adj | Adv Adj | Neg | ε
+Adv -> 'immer' | 'sehr' | 'nie' | 'oft' | 'hier' | 'dort' | 'heute' | ε
+Adj -> 'schön' | 'laut'  | 'klein' | 'intelligent' | 'dumm' | 'freundlich' | 'traurig'
+Neg -> 'nicht' | ε
+```
+Primero expliquemos que nos encontramos con lo que va despues del verbo, su negacion, adverbio o adjetivo. Existen muchas posibilidades en el lenguaje para usarlas.
+- Spielt sehr gut (jueg@ muy bien)
+- Spielt nicht (no jueg@)
+- Spielt gut (jueg@ bien)
+- Spielt nicht gut (no jueg@ bien)
+Entendiendo los posibles casos, nos encontramos que en caso de usar Rest, usaremos siempre Adj o Neg.
+Ahora veamos el error de ambiguedad, esta existe porque podemos crear de muchas maneras un terminal. Ejemplo, al crear 'schön' (bello).
+- Opcion 1: RestAux -> Adj -> 'schön'
+- Opcion 2: RestAux-> Adv Adj -> Adv -> ε -> Adj -> 'schön'
+- Opcion 3: RestAux-> Neg Adv Adj -> Neg -> ε -> Adv -> ε -> Adj -> 'schön'
+Asi como usamos este ejemplo realemente encontramos mucha ambiguedad con otras terminaciones en esta parte de la gramatica, para cambiarlo hay muchas maneras en realidad.
+
 
 #### Tipo de Gramatica
 Basandonos en 'The Extended Chomsky Hierarchy´ encontramos que esta gramatica basada en el idioma aleman que hicimos, es una gramatica libre de contexto. Esto pasa porque no existe dependencia, osease no existe contexto.  Esto se debe a que en todas las reglas, el lado izquierdo contiene únicamente variables y no terminales, lo que impide que se clasifique como una gramática que dependa de un contexto. Por esto que de igual manera esta relacionado a lo que se comento arriba sobre la ambiguedad, es que esta gramatica pertenece a un lenguaje de tipo dos.
