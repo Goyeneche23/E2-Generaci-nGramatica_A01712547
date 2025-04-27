@@ -2,7 +2,6 @@ import nltk
 from nltk import CFG
 nltk.download('punkt')
 
-# Define a context-free grammar
 grammar = CFG.fromstring("""
     Inicio -> Sent Inicio1
     Inicio1 -> Sent Inicio1
@@ -217,15 +216,11 @@ grammar = CFG.fromstring("""
     Adj -> 'gesund'
 """)
 
-# Create a parser with the defined grammar
 parser = nltk.ChartParser(grammar)
 
-# Input sentence to be parsed
 sentence = "die Hund und Mark spielt Fußball sehr gut . ich spielt nicht gut . "
 
-# Tokenize the sentence
 tokens = nltk.word_tokenize(sentence)
 
-# Parse the sentence
 for tree in parser.parse(tokens):
     tree.pretty_print()
