@@ -174,6 +174,9 @@ Como funciona esto es que el parser hara uso de las tablas generadas para buscar
 
 Esta es la complejidad de nuestro parser LL(1), donde n dependera de la cadena que mandemos a analizar. De igual manera el peor caso y el mejor caso posible seran O(n), el mejor caso sera O(1).
 
+![Captura de pantalla 2025-04-23 113252](https://github.com/user-attachments/assets/663a308c-c0d6-4d4c-a1b8-a1288385852e)
+
+
 #### Referencias
 GeeksforGeeks (06 Feb 2025). Construction of LL(1) Parsing Table. https://www.geeksforgeeks.org/construction-of-ll1-parsing-table/
 
